@@ -146,11 +146,11 @@ window.BECO_CONFIG = {
       tema: 'vermelho',
       selo: 'Pra petiscar',
       titulo: 'Torresmo + 3 Heineken',
-      subtitulo: 'Porção de 500 g + 3 long necks 330 ml',
+      subtitulo: 'Porção de 500 g + 3 Heineken 600 ml',
       imagem: 'assets/img/torresmo.jpg',
       itens: [
         { nome: 'Torresmo — 500 g', rotulo: 'Torresmo 500 g', preco: 45.00 },
-        { nome: 'Heineken — Lager, long neck, 330 ml', rotulo: 'Heineken', preco: 14.00, qtd: 3, imagem: 'assets/img/heineken-long-neck.jpg' }
+        { nome: 'Heineken — Lager, 600 ml', rotulo: 'Heineken 600 ml', preco: 22.00, qtd: 3, imagem: 'assets/img/heineken-long-neck.jpg' }
       ]
     },
     {
