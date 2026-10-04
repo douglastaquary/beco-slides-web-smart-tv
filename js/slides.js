@@ -150,7 +150,7 @@ window.BECO_CONFIG = {
       imagem: 'assets/img/torresmo.jpg',
       itens: [
         { nome: 'Torresmo — 500 g', rotulo: 'Torresmo 500 g', preco: 45.00 },
-        { nome: 'Heineken — Lager, 600 ml', rotulo: 'Heineken 600 ml', preco: 22.00, qtd: 3, imagem: 'assets/img/heineken-long-neck.jpg' }
+        { nome: 'Heineken — Lager, 600 ml', rotulo: 'Heineken 600 ml', preco: 22.00, qtd: 3, imagem: 'assets/img/heineken-600ml.jpg' }
       ]
     },
     {
