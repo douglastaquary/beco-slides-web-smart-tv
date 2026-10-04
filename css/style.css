@@ -461,6 +461,271 @@ html, body {
   transform: rotate(10deg) scale(1);
 }
 
+/* ---------- Variante para fotos verticais (fotoVertical: true) ---------- */
+
+.layout-vertical .foto {
+  position: absolute;
+  top: 28rem;
+  right: 3.6rem;
+  bottom: 5rem;
+  width: 25rem;
+  margin: 0;
+}
+
+.layout-vertical .preco {
+  margin-right: 28rem;
+}
+
+.layout-vertical .preco-inteiro {
+  font-size: 16rem;
+}
+
+.layout-vertical .preco-centavos {
+  font-size: 6.6rem;
+}
+
+.layout-vertical .preco-moeda {
+  font-size: 4.6rem;
+  margin-top: 1.4rem;
+}
+
+.layout-vertical .faixa {
+  margin-top: auto;
+  margin-right: 28rem;
+  text-align: left;
+  font-size: 2.6rem;
+}
+
+.layout-vertical .rodape {
+  margin-right: 28rem;
+  text-align: left;
+}
+
+.layout-vertical .observacao {
+  top: 17rem;
+  right: auto;
+  left: -23rem;
+  width: 19rem;
+  height: 19rem;
+}
+
+/* ---------- Rótulo/detalhe do preço (precoRotulo / precoDetalhe) ---------- */
+
+.preco-rotulo {
+  margin: 1.4rem 0 0;
+  font-weight: 800;
+  font-size: 2.8rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+
+.preco-rotulo + .preco {
+  margin-top: 0.4rem;
+}
+
+.preco-detalhe {
+  -webkit-align-self: center;
+  align-self: center;
+  margin: 1.6rem 0 0 1.8rem;
+  font-family: 'Baloo 2', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 800;
+  font-size: 2.7rem;
+  line-height: 1.1;
+}
+
+/* ---------- Lista de itens (lista) ---------- */
+
+.miolo {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 1.8rem;
+}
+
+.lista {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0 2.2rem 0 0;
+  list-style: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+
+.lista li {
+  position: relative;
+  padding-left: 3.4rem;
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 1.05;
+  opacity: 0;
+  -webkit-transform: translate3d(-3rem, 0, 0);
+  transform: translate3d(-3rem, 0, 0);
+  -webkit-transition: opacity 0.4s ease 0.6s, -webkit-transform 0.6s ease 0.6s;
+  transition: opacity 0.4s ease 0.6s, transform 0.6s ease 0.6s;
+}
+
+.lista li:nth-child(2) { -webkit-transition-delay: 0.75s; transition-delay: 0.75s; }
+.lista li:nth-child(3) { -webkit-transition-delay: 0.9s; transition-delay: 0.9s; }
+.lista li:nth-child(4) { -webkit-transition-delay: 1.05s; transition-delay: 1.05s; }
+.lista li:nth-child(5) { -webkit-transition-delay: 1.2s; transition-delay: 1.2s; }
+
+.ativo .lista li {
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.lista li:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+}
+
+.lista-detalhe {
+  display: block;
+  margin-top: 0.3rem;
+  font-weight: 600;
+  font-size: 2.4rem;
+  line-height: 1.1;
+  opacity: 0.92;
+}
+
+.com-lista .foto {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 23rem;
+  flex: 0 0 23rem;
+  width: 23rem;
+  margin: 0 0 1.6rem;
+}
+
+.lista--curta li {
+  padding-left: 4.4rem;
+  font-size: 5rem;
+}
+
+.lista--curta li:before {
+  top: 1.6rem;
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.com-lista .lista--curta + .foto {
+  -webkit-flex-basis: 30rem;
+  flex-basis: 30rem;
+  width: 30rem;
+}
+
+.com-lista .preco-inteiro {
+  font-size: 15rem;
+}
+
+.com-lista .preco-centavos {
+  font-size: 6.6rem;
+}
+
+.com-lista .preco-moeda {
+  font-size: 4.8rem;
+  margin-top: 1.4rem;
+}
+
+/* ---------- Selo grande sobre a foto (destaque) ---------- */
+
+.destaque {
+  position: absolute;
+  bottom: 3rem;
+  right: -1.8rem;
+  z-index: 4;
+  padding: 1.2rem 3rem 0.9rem;
+  border-radius: 1.4rem;
+  border: 0.5rem solid #fff;
+  text-align: center;
+  font-family: 'Anton', Impact, 'Arial Narrow', sans-serif;
+  font-size: 5.2rem;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  -webkit-transform: rotate(-24deg) scale(0.3);
+  transform: rotate(-24deg) scale(0.3);
+  -webkit-transition: opacity 0.3s ease 0.9s, -webkit-transform 0.7s cubic-bezier(0.3, 1.6, 0.5, 1) 0.9s;
+  transition: opacity 0.3s ease 0.9s, transform 0.7s cubic-bezier(0.3, 1.6, 0.5, 1) 0.9s;
+}
+
+.destaque span {
+  display: block;
+}
+
+.ativo .destaque {
+  opacity: 1;
+  -webkit-transform: rotate(-7deg) scale(1);
+  transform: rotate(-7deg) scale(1);
+}
+
+.ativo .destaque span {
+  -webkit-animation: pulsar 1.6s ease-in-out 1.8s infinite;
+  animation: pulsar 1.6s ease-in-out 1.8s infinite;
+}
+
+@-webkit-keyframes pulsar {
+  0%, 100% { -webkit-transform: scale(1); }
+  50% { -webkit-transform: scale(1.08); }
+}
+@keyframes pulsar {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.com-lista .destaque {
+  bottom: -1.6rem;
+  right: -1.6rem;
+  padding: 1rem 1.4rem 0.8rem;
+  font-size: 2.6rem;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Quantidade no círculo do item (qtd > 1) ---------- */
+
+.extra {
+  position: relative;
+  overflow: visible;
+}
+
+.extra-qtd {
+  position: absolute;
+  right: -0.4rem;
+  bottom: -0.4rem;
+  width: 6.4rem;
+  height: 6.4rem;
+  border-radius: 50%;
+  border: 0.4rem solid #fff;
+  text-align: center;
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: 3.2rem;
+  line-height: 5.6rem;
+}
+
 /* ---------- Faixa e rodapé ---------- */
 
 .faixa {
@@ -490,6 +755,16 @@ html, body {
   font-weight: 600;
   font-size: 1.6rem;
   opacity: 0.7;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+}
+
+.contato {
+  margin: 1.4rem 0 0;
+  text-align: center;
+  font-weight: 800;
+  font-size: 2.3rem;
+  line-height: 1.2;
   -webkit-flex-shrink: 0;
   flex-shrink: 0;
 }
@@ -531,3 +806,44 @@ html, body {
 .tema-marrom .foto-moldura,
 .tema-marrom .extra { border-color: #f7b500; }
 .tema-marrom .observacao { background: #d52b1e; color: #fff; }
+
+.tema-creme {
+  background: #f6eedf;
+  background-image: radial-gradient(circle at 30% 25%, #fffaf0 0%, #f6eedf 55%, #ead9bd 100%);
+  color: #5a2a14;
+}
+.tema-creme .selo { background: #5a2a14; color: #ffd23f; }
+.tema-creme .titulo { color: #e8432a; }
+.tema-creme .preco { color: #e8432a; }
+.tema-creme .faixa { background: #e8432a; color: #fff; }
+.tema-creme .foto-moldura,
+.tema-creme .extra { border-color: #5a2a14; }
+.tema-creme .observacao { background: #e8432a; color: #fff; }
+
+.tema-amarelo .preco-rotulo { color: #8e140f; }
+.tema-vermelho .preco-rotulo { color: #fff3cf; }
+.tema-marrom .preco-rotulo { color: #f6e7c1; }
+.tema-creme .preco-rotulo { color: #5a2a14; }
+
+.tema-amarelo .preco-detalhe,
+.tema-amarelo .contato { color: #5a1a0e; }
+.tema-vermelho .preco-detalhe,
+.tema-vermelho .contato { color: #fff; }
+.tema-marrom .preco-detalhe,
+.tema-marrom .contato { color: #f6e7c1; }
+.tema-creme .preco-detalhe,
+.tema-creme .contato { color: #5a2a14; }
+
+.tema-amarelo .lista li:before { background: #d52b1e; }
+.tema-vermelho .lista li:before { background: #ffd23f; }
+.tema-marrom .lista li:before { background: #f7b500; }
+.tema-creme .lista li:before { background: #e8432a; }
+
+.tema-amarelo .destaque,
+.tema-amarelo .extra-qtd { background: #d52b1e; color: #fff; }
+.tema-vermelho .destaque,
+.tema-vermelho .extra-qtd { background: #ffd23f; color: #8e140f; }
+.tema-marrom .destaque,
+.tema-marrom .extra-qtd { background: #d52b1e; color: #fff; }
+.tema-creme .destaque,
+.tema-creme .extra-qtd { background: #2f9e44; color: #fff; }

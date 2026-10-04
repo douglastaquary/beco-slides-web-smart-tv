@@ -31,7 +31,8 @@
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+      .replace(/"/g, '&quot;')
+      .replace(/R\$ /g, 'R$\u00a0');
   }
 
   function totalEmCentavos(slide) {
@@ -49,20 +50,46 @@
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   }
 
-  function htmlPreco(centavos) {
+  function linhas(texto) {
+    var partes = String(texto == null ? '' : texto).split('\n');
+    for (var i = 0; i < partes.length; i++) partes[i] = escapar(partes[i]);
+    return partes.join('<br>');
+  }
+
+  function htmlPreco(centavos, slide) {
+    var rotulo = slide.precoRotulo
+      ? '<p class="preco-rotulo">' + escapar(slide.precoRotulo) + '</p>'
+      : '';
     if (centavos === null) {
-      return '<div class="preco preco--consulte"><span class="preco-consulte">Consulte</span></div>';
+      return rotulo + '<div class="preco preco--consulte"><span class="preco-consulte">Consulte</span></div>';
     }
     var reais = Math.floor(centavos / 100);
     var cents = centavos % 100;
-    return '<div class="preco">' +
+    return rotulo + '<div class="preco">' +
       '<span class="preco-moeda">R$</span>' +
       '<span class="preco-inteiro">' + separarMilhar(reais) + '</span>' +
       '<span class="preco-centavos">,' + (cents < 10 ? '0' : '') + cents + '</span>' +
+      (slide.precoDetalhe ? '<span class="preco-detalhe">' + linhas(slide.precoDetalhe) + '</span>' : '') +
       '</div>';
   }
 
+  function htmlLista(lista) {
+    var html = '';
+    var curta = true;
+    for (var i = 0; i < lista.length; i++) {
+      var item = lista[i];
+      var texto = typeof item === 'string' ? item : item.texto;
+      var detalhe = typeof item === 'string' ? '' : item.detalhe;
+      if (detalhe || String(texto).length > 12) curta = false;
+      html += '<li><span class="lista-texto">' + escapar(texto) + '</span>' +
+        (detalhe ? '<span class="lista-detalhe">' + escapar(detalhe) + '</span>' : '') +
+        '</li>';
+    }
+    return '<ul class="lista' + (curta ? ' lista--curta' : '') + '">' + html + '</ul>';
+  }
+
   function textoFaixa(slide) {
+    if (slide.faixa) return escapar(slide.faixa);
     var itens = slide.itens || [];
     if (itens.length > 1) {
       var partes = [];
@@ -90,7 +117,10 @@
     var html = '';
     for (var i = 0; i < itens.length; i++) {
       if (!itens[i].imagem) continue;
-      html += '<div class="extra"><img src="' + escapar(itens[i].imagem) + '" alt=""></div>';
+      var qtd = itens[i].qtd || 1;
+      html += '<div class="extra"><img src="' + escapar(itens[i].imagem) + '" alt="">' +
+        (qtd > 1 ? '<span class="extra-qtd">' + qtd + 'x</span>' : '') +
+        '</div>';
     }
     return html ? '<div class="extras">' + html + '</div>' : '';
   }
@@ -102,24 +132,36 @@
     var classeTitulo = 'titulo' + (titulo.length > 24 ? ' titulo--longo' : '');
 
     var extras = htmlExtras(slide);
+    var lista = slide.lista && slide.lista.length ? htmlLista(slide.lista) : '';
+    var subtitulo = slide.subtitulo || (combo ? slide.descricao : '');
+    var preco = htmlPreco(totalEmCentavos(slide), slide);
+    var foto =
+      '<div class="foto">' +
+        '<div class="foto-moldura"><img class="foto-img" src="' + escapar(slide.imagem || '') + '" alt=""' +
+          (slide.posicaoImagem ? ' style="object-position: ' + escapar(slide.posicaoImagem) + '"' : '') +
+        '></div>' +
+        extras +
+        (slide.observacao ? htmlObservacao(slide.observacao) : '') +
+        (slide.destaque ? '<div class="destaque"><span>' + linhas(slide.destaque) + '</span></div>' : '') +
+      '</div>';
+
     el.className = 'slide tema-' + (slide.tema || 'amarelo') +
       (config.zoomNasFotos === false ? '' : ' com-zoom') +
-      (extras ? ' com-extras' : '');
+      (extras ? ' com-extras' : '') +
+      (lista ? ' com-lista' : '') +
+      (slide.fotoVertical && !lista ? ' layout-vertical' : '');
     el.innerHTML =
       '<div class="slide-topo">' +
         '<span class="selo">' + escapar(slide.selo || '') + '</span>' +
         '<div class="logo-badge"><img src="' + LOGO + '" alt="Beco da Praia"></div>' +
       '</div>' +
       '<h1 class="' + classeTitulo + '">' + escapar(titulo) + '</h1>' +
-      (combo && slide.descricao ? '<p class="subtitulo">' + escapar(slide.descricao) + '</p>' : '') +
-      htmlPreco(totalEmCentavos(slide)) +
-      '<div class="foto">' +
-        '<div class="foto-moldura"><img class="foto-img" src="' + escapar(slide.imagem || '') + '" alt=""></div>' +
-        extras +
-        (slide.observacao ? htmlObservacao(slide.observacao) : '') +
-      '</div>' +
+      (subtitulo ? '<p class="subtitulo">' + escapar(subtitulo) + '</p>' : '') +
+      (lista ? '<div class="miolo">' + lista + foto + '</div>' + preco : preco + foto) +
       '<div class="faixa">' + textoFaixa(slide) + '</div>' +
-      '<p class="rodape">' + escapar(config.rodape || '') + '</p>';
+      (slide.contato
+        ? '<p class="contato">' + linhas(slide.contato) + '</p>'
+        : '<p class="rodape">' + escapar(config.rodape || '') + '</p>');
 
     var imgs = el.getElementsByTagName('img');
     for (var i = 0; i < imgs.length; i++) {

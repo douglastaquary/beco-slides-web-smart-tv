@@ -18,7 +18,7 @@ js/slides.js          >>> CONFIGURAÇÃO DOS SLIDES (edite aqui) <<<
 js/app.js             lógica do carrossel
 assets/img/           fotos dos produtos e logo (copiadas e otimizadas do repositório do cardápio)
 assets/fonts/         fontes Anton e Baloo 2 (locais, não dependem de internet externa)
-screenshots/          captura de referência em 1920x1080
+screenshots/          capturas de referência em 1920x1080 (painel-slides-N-M.png = slides N e N+1)
 ```
 
 ## Rodar localmente
@@ -42,7 +42,7 @@ Tudo fica em `js/slides.js`. Cada slide é um bloco `{ ... }` dentro de `slides:
 ```js
 {
   id: 'meu-produto',
-  tema: 'amarelo',              // 'amarelo' | 'vermelho' | 'marrom'
+  tema: 'amarelo',              // 'amarelo' | 'vermelho' | 'marrom' | 'creme'
   selo: 'Novidade',             // etiqueta no topo
   titulo: 'Nome do produto',
   descricao: 'Frase curta.',    // aparece na faixa inferior (ou abaixo do título em combos)
@@ -56,11 +56,47 @@ Tudo fica em `js/slides.js`. Cada slide é um bloco `{ ... }` dentro de `slides:
 }
 ```
 
+Campos opcionais para layouts especiais (todos em `js/slides.js`):
+
+| Campo | O que faz |
+| --- | --- |
+| `tema: 'creme'` | Fundo creme com título vermelho (usado no slide de evento). |
+| `subtitulo` | Frase curta logo abaixo do título (em qualquer slide). |
+| `precoRotulo` | Texto pequeno acima do preço (ex.: `'A partir de'`, `'1º lote · pulseira antecipada'`). |
+| `precoDetalhe` | Texto ao lado do preço; `\n` quebra linha (ex.: `'por pessoa\naté o dia 05/10'`). |
+| `lista` | Tópicos ao lado da foto: `['Coco', 'Paçoca']` ou `[{ texto: 'Samba ao vivo', detalhe: '13h às 16h' }]`. Com lista, a foto vira coluna à direita e o preço fica abaixo. Tópicos curtos aparecem maiores. |
+| `destaque` | Selo grande e pulsante sobre a foto (ex.: `'Novidade'`, `'Dose dupla!\nCompre 1,\nganhe outra'`). |
+| `faixa` | Texto da faixa inferior (substitui o automático). |
+| `contato` | Linha(s) de contato no lugar do rodapé (ex.: WhatsApp e endereço). |
+| item `qtd` + `imagem` | Itens com `qtd > 1` e imagem mostram a etiqueta "3x" no círculo. |
+
+Exemplo — evento com lote de pulseira (para virar o lote, edite só `precoRotulo`, `precoDetalhe` e `preco`):
+
+```js
+{
+  id: 'feijoada-no-beco',
+  tema: 'creme',
+  selo: 'Evento especial',
+  titulo: 'Feijoada no Beco',
+  subtitulo: 'Sábado, 10 de outubro, a partir das 13h',
+  imagem: 'assets/img/feijoada-panela.jpg',
+  lista: [{ texto: 'Samba de roda', detalhe: 'com a Resenha do Krill, das 13h às 16h' }, 'Samba ao vivo'],
+  destaque: 'Dose dupla!\nCompre 1,\nganhe outra',
+  precoRotulo: '1º lote · pulseira antecipada',
+  precoDetalhe: 'por pessoa\naté o dia 05/10',
+  itens: [{ nome: 'Feijoada no Beco — pulseira 1º lote', preco: 79.90 }],
+  faixa: 'Garanta já sua pulseira antecipada!',
+  contato: 'Reservas no WhatsApp: 13 99876-2211\nAv. Vicente de Carvalho, 761 - Centro'
+}
+```
+
 - O preço grande do banner é a **soma** de `preco x qtd` de todos os itens (sem descontos).
 - Use `preco: null` se não souber o preço: o banner mostra "Consulte".
 - Com mais de um item, a faixa inferior lista os itens ("A + B + C").
 - Outras opções no topo do arquivo: `segundosPorSlide`, `zoomNasFotos` (desligue se a TV ficar lenta),
   `recarregarACadaHoras` e `rodape`.
+- Fotos em pé (ex.: copos de drink): use `fotoVertical: true` — a foto vira uma coluna alta à direita.
+  Para escolher a parte da foto que aparece no corte, use `posicaoImagem: 'center 40%'`.
 - Fotos novas: coloque em `assets/img/` (de preferência JPG com até ~1100 px no maior lado).
 - Depois de editar CSS/JS, aumente o número `?v=` em `index.html` para a TV não usar o cache antigo.
 
