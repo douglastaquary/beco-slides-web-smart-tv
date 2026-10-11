@@ -51,29 +51,6 @@ window.BECO_CONFIG = {
 
   slides: [
     {
-      id: 'feijoada-no-beco',
-      tema: 'creme',
-      selo: 'Evento especial',
-      titulo: 'Feijoada no Beco',
-      subtitulo: 'Sábado, 10 de outubro, a partir das 13h',
-      imagem: 'assets/img/feijoada-panela.jpg',
-      lista: [
-        { texto: 'Samba de roda', detalhe: 'com a Resenha do Krill, das 13h às 16h' },
-        'Samba ao vivo',
-        'Buffet de feijoada à vontade',
-        { texto: 'Caipirinha de cachaça dobrada', detalhe: 'limão, abacaxi ou rapadura' }
-      ],
-      destaque: 'Dose dupla!\nCompre 1,\nganhe outra',
-      // Lote da pulseira: troque o rótulo, o preço e a data aqui quando virar o lote.
-      precoRotulo: '1º lote · pulseira antecipada',
-      precoDetalhe: 'por pessoa\naté o dia 05/10',
-      itens: [
-        { nome: 'Feijoada no Beco — pulseira 1º lote', preco: 79.90 }
-      ],
-      faixa: 'Garanta já sua pulseira antecipada!',
-      contato: 'Reservas no WhatsApp: 13 99876-2211\nAv. Vicente de Carvalho, 761 - Centro'
-    },
-    {
       id: 'trio-nordestino',
       tema: 'amarelo',
       selo: 'Para compartilhar',
